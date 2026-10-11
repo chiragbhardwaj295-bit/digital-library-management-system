@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · Digital Library{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div><p class="eyebrow">OVERVIEW</p><h1>Library dashboard</h1><p class="muted">Hello, {{ session.get('username', 'Admin') }}. Here is your library at a glance.</p></div>
+  <a class="btn primary" href="{{ url_for('add_book') }}">＋ Add a book</a>
+</div>
+<div class="stats-grid">
+  <div class="stat-card"><span class="stat-icon">📚</span><p>Total titles</p><strong>{{ stats.books }}</strong></div>
+  <div class="stat-card"><span class="stat-icon">📖</span><p>Total copies</p><strong>{{ stats.copies }}</strong></div>
+  <div class="stat-card"><span class="stat-icon">✅</span><p>Available copies</p><strong>{{ stats.available }}</strong></div>
+  <div class="stat-card"><span class="stat-icon">👥</span><p>Members</p><strong>{{ stats.members }}</strong></div>
+  <div class="stat-card"><span class="stat-icon">↗</span><p>Currently issued</p><strong>{{ stats.issued }}</strong></div>
+</div>
+<section class="panel">
+  <div class="panel-heading"><h2>Recent transactions</h2><a href="{{ url_for('transactions') }}">View all →</a></div>
+  {% if recent %}
+  <div class="table-wrap"><table><thead><tr><th>Book</th><th>Member</th><th>Issue date</th><th>Status</th></tr></thead><tbody>
+  {% for item in recent %}<tr><td>{{ item.title }}</td><td>{{ item.member_name }}</td><td>{{ item.issue_date }}</td><td><span class="pill {{ 'green' if item.status == 'Returned' else 'amber' }}">{{ item.status }}</span></td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty">No transactions yet. Register a member and issue a book to get started.</div>{% endif %}
+</section>
+{% endblock %}

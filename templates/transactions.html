@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Issue / Return · Digital Library{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">CIRCULATION</p><h1>Issue & return books</h1><p class="muted">Track books borrowed by registered members.</p></div></div>
+<section class="panel">
+<div class="panel-heading"><h2>Issue a book</h2></div>
+{% if books and members %}
+<form method="post" action="{{ url_for('issue_book') }}" class="issue-form">
+<label>Book<select name="book_id" required>{% for b in books %}<option value="{{ b.id }}">{{ b.title }} ({{ b.available_copies }} available)</option>{% endfor %}</select></label>
+<label>Member<select name="member_id" required>{% for m in members %}<option value="{{ m.id }}">{{ m.name }}</option>{% endfor %}</select></label>
+<button class="btn primary" type="submit">Issue book</button>
+</form>
+{% else %}<div class="empty">To issue a book, first add a book with available copies and register a member.</div>{% endif %}
+</section>
+<section class="panel">
+<div class="panel-heading"><h2>Transaction history</h2><span class="count">{{ transactions|length }} records</span></div>
+{% if transactions %}<div class="table-wrap"><table><thead><tr><th>Book</th><th>Member</th><th>Issue date</th><th>Return date</th><th>Status</th><th>Action</th></tr></thead><tbody>
+{% for tx in transactions %}<tr><td class="strong">{{ tx.book_title }}</td><td>{{ tx.member_name }}</td><td>{{ tx.issue_date }}</td><td>{{ tx.return_date or '—' }}</td><td><span class="pill {{ 'green' if tx.status == 'Returned' else 'amber' }}">{{ tx.status }}</span></td><td>{% if tx.status == 'Issued' %}<form method="post" action="{{ url_for('return_book', transaction_id=tx.id) }}"><button class="btn small primary">Mark returned</button></form>{% else %}<span class="muted">Complete</span>{% endif %}</td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty">No issue/return transactions yet.</div>{% endif %}
+</section>
+{% endblock %}

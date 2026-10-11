@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Admin Login · Digital Library{% endblock %}
+{% block content %}
+<section class="login-card">
+  <div class="logo">📚</div>
+  <p class="eyebrow">LIBRARY ADMINISTRATION</p>
+  <h1>Welcome back</h1>
+  <p class="muted">Sign in to manage books, members and transactions.</p>
+  <form method="post" class="stack">
+    <label>Username<input name="username" required autocomplete="username" placeholder="Enter username"></label>
+    <label>Password<input name="password" type="password" required autocomplete="current-password" placeholder="Enter password"></label>
+    <button class="btn primary full" type="submit">Sign in</button>
+  </form>
+  <p class="demo">Demo login: <b>admin</b> / <b>admin123</b></p>
+</section>
+{% endblock %}

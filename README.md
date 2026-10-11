@@ -1,36 +1,30 @@
 # Digital Library Management System
 
-A desktop-based library management application developed using Python, Tkinter, and SQLite.
+A beginner-friendly college project built with Python, Flask, SQLite, HTML and CSS.
 
 ## Features
 - Admin login
-- Add, update, delete, and view books
-- Search books by title, author, and category
-- Register library members
-- Issue and return books
-- Track available and issued copies
-- Store data permanently using SQLite
-- View transaction history
+- Dashboard with book/member/issue statistics
+- Add, edit, delete and search books
+- Register and search members
+- Issue books and mark books returned
+- SQLite database persists between runs
 
-## Technologies Used
-- Python
-- Tkinter
-- SQLite
-- GitHub
+## Run in GitHub Codespaces
+Open the terminal in this project folder and run:
 
-## How to Run
-1. Install Python 3.
-2. Download or clone this repository.
-3. Open a terminal in the project folder.
-4. Run:
+```bash
+python -m pip install -r requirements.txt
+python app.py
+```
 
-   `python digital_library.py`
+When Codespaces asks to open port 5000, choose **Open in Browser** (port visibility can be Private).
 
-## Demo Login
+## Demo login
 - Username: `admin`
 - Password: `admin123`
 
-**Note:** The demo credentials are for educational use only. Change the default credentials and improve password security before any real-world use.
+Change the demo credentials and `SECRET_KEY` before any real/public deployment. This is a learning project, not production-ready software.
 
-## Project Purpose
-This project demonstrates basic Python programming, database operations, graphical user interface design, and library management workflows.
+## Database
+`library.db` is created automatically on the first run. Do not commit a real database containing personal member data to a public repository.

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Digital Library{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% if session.get('admin_id') %}
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('dashboard') }}">📚 Digital Library</a>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('books') }}">Books</a>
+      <a href="{{ url_for('members') }}">Members</a>
+      <a href="{{ url_for('transactions') }}">Issue / Return</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+  {% endif %}
+  <main class="container {% if not session.get('admin_id') %}login-container{% endif %}">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>Digital Library Management System · Python + Flask + SQLite</footer>
+</body>
+</html>

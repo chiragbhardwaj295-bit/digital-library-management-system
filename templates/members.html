@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Members · Digital Library{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">PEOPLE</p><h1>Library members</h1><p class="muted">Register readers and keep their details organised.</p></div></div>
+<div class="two-col">
+<section class="panel"><div class="panel-heading"><h2>Register a member</h2></div>
+<form method="post" class="stack">
+<label>Full name<input name="name" required placeholder="Member's full name"></label>
+<label>Email <span class="optional">optional</span><input type="email" name="email" placeholder="name@example.com"></label>
+<label>Phone <span class="optional">optional</span><input name="phone" placeholder="Phone number"></label>
+<button class="btn primary" type="submit">Register member</button>
+</form></section>
+<section class="panel"><div class="panel-heading"><h2>Member directory</h2><span class="count">{{ members|length }} shown</span></div>
+<form class="search-bar compact" method="get"><input name="q" value="{{ q }}" placeholder="Search members…"><button class="btn dark">Search</button></form>
+{% if members %}<div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th></tr></thead><tbody>{% for m in members %}<tr><td class="strong">{{ m.name }}</td><td>{{ m.email or '—' }}</td><td>{{ m.phone or '—' }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">No members found.</div>{% endif %}
+</section></div>
+{% endblock %}

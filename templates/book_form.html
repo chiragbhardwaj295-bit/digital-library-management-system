@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} · Digital Library{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">CATALOGUE</p><h1>{{ page_title }}</h1><p class="muted">Fill in the book details below.</p></div><a class="btn light" href="{{ url_for('books') }}">← Back to books</a></div>
+<section class="panel form-panel">
+<form method="post" class="stack">
+<label>Book title<input name="title" required value="{{ book.title if book else '' }}" placeholder="e.g. The Alchemist"></label>
+<label>Author<input name="author" required value="{{ book.author if book else '' }}" placeholder="Author name"></label>
+<label>Category<input name="category" required value="{{ book.category if book else '' }}" placeholder="e.g. Fiction, Technology"></label>
+<label>Total copies<input type="number" name="total_copies" min="1" required value="{{ book.total_copies if book else 1 }}"></label>
+<button class="btn primary" type="submit">{{ 'Save changes' if book else 'Add book' }}</button>
+</form>
+</section>
+{% endblock %}
